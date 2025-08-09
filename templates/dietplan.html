@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Diet Plan | CureByDiet</title>
+    <style>
+        :root {
+            --primary: #2c8a7d;
+            --primary-light: #e0f2f1;
+            --secondary: #e74c3c;
+            --accent: #f39c12;
+            --dark: #333;
+            --light: #f8f9fa;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+
+        /* Main Content */
+        .hero-section {
+            background: linear-gradient(135deg, rgba(44, 138, 125, 0.9), rgba(44, 138, 125, 0.8)), url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Diet Plan Sections */
+        .plan-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .plan-section {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .plan-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .plan-section h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .plan-section h3 i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        .plan-section p {
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        .food-category {
+            margin-bottom: 1.5rem;
+        }
+
+        .food-category h4 {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .food-category h4 i {
+            margin-right: 8px;
+            font-size: 1rem;
+        }
+
+        .food-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 0.5rem;
+        }
+
+        .food-item {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .food-item:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Consultation Section */
+        .consultation-section {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+            animation: pulse 2s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from { box-shadow: 0 0 0 rgba(231, 76, 60, 0.1); }
+            to { box-shadow: 0 0 0 10px rgba(231, 76, 60, 0); }
+        }
+
+        .consultation-section p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .btn {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn:hover {
+            background-color: #c0392b;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(231, 76, 60, 0.3);
+        }
+
+        .btn i {
+            font-size: 1.2rem;
+        }
+
+        /* Additional Info */
+        .info-box {
+            background-color: #fff9e6;
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .info-box h4 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-box h4 i {
+            margin-right: 8px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+            
+            .plan-container {
+                padding: 1.5rem;
+            }
+            
+            .food-items {
+                gap: 8px;
+            }
+            
+            .food-item {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-heartbeat"></i>
+                CureByDiet
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero-section">
+            <h1>Your Personalized Diabetes Diet Plan</h1>
+            <p>Based on your symptoms and health profile, this scientifically-backed diet plan will help manage your blood sugar levels effectively</p>
+        </section>
+
+        <div class="plan-container">
+            <div class="plan-section" style="animation-delay: 0.2s;">
+                <h3><i class="fas fa-apple-alt"></i> Healthy Carbohydrates & Fiber-Rich Foods</h3>
+                <p>Fiber moderates digestion and helps control blood sugar levels. Choose these nutrient-dense options:</p>
+                
+                <div class="food-category">
+                    <h4><i class="fas fa-lemon"></i> Fruits</h4>
+                    <div class="food-items">
+                        <span class="food-item">Berries</span>
+                        <span class="food-item">Melon</span>
+                        <span class="food-item">Apples</span>
+                        <span class="food-item">Pears</span>
+                        <span class="food-item">Peaches</span>
+                        <span class="food-item">Low-sugar fruits</span>
+                    </div>
+                </div>
+                
+                <div class="food-category">
+                    <h4><i class="fas fa-carrot"></i> Vegetables</h4>
+                    <div class="food-items">
+                        <span class="food-item">Leafy greens</span>
+                        <span class="food-item">Asparagus</span>
+                        <span class="food-item">Carrots</span>
+                        <span class="food-item">Cucumber</span>
+                        <span class="food-item">Peppers</span>
+                        <span class="food-item">Tomatoes</span>
+                    </div>
+                </div>
+                
+                <div class="food-category">
+                    <h4><i class="fas fa-seedling"></i> Nuts</h4>
+                    <div class="food-items">
+                        <span class="food-item">Almonds</span>
+                        <span class="food-item">Walnuts</span>
+                        <span class="food-item">Pistachios</span>
+                        <span class="food-item">Macadamia</span>
+                    </div>
+                </div>
+                
+                <div class="food-category">
+                    <h4><i class="fas fa-bread-slice"></i> Whole Grains</h4>
+                    <div class="food-items">
+                        <span class="food-item">Brown rice</span>
+                        <span class="food-item">Quinoa</span>
+                        <span class="food-item">Farro</span>
+                        <span class="food-item">Whole wheat</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="plan-section" style="animation-delay: 0.4s;">
+                <h3><i class="fas fa-drumstick-bite"></i> Protein Sources</h3>
+                <p>Quality proteins help maintain muscle mass and keep you full longer:</p>
+                <div class="food-items">
+                    <span class="food-item">Eggs</span>
+                    <span class="food-item">Fish</span>
+                    <span class="food-item">Chicken</span>
+                    <span class="food-item">Beans</span>
+                    <span class="food-item">Lentils</span>
+                    <span class="food-item">Tofu</span>
+                    <span class="food-item">Greek yogurt</span>
+                </div>
+            </div>
+
+            <div class="plan-section" style="animation-delay: 0.6s;">
+                <h3><i class="fas fa-egg"></i> Starchy Vegetables</h3>
+                <p>These provide energy while being rich in nutrients:</p>
+                <div class="food-items">
+                    <span class="food-item">Sweet potatoes</span>
+                    <span class="food-item">Corn</span>
+                    <span class="food-item">Peas</span>
+                    <span class="food-item">Winter squash</span>
+                </div>
+            </div>
+
+            <div class="plan-section" style="animation-delay: 0.8s;">
+                <h3><i class="fas fa-seedling"></i> Healthy Fats</h3>
+                <p>Monounsaturated and polyunsaturated fats support heart health:</p>
+                <div class="food-items">
+                    <span class="food-item">Avocados</span>
+                    <span class="food-item">Olive oil</span>
+                    <span class="food-item">Nuts</span>
+                    <span class="food-item">Seeds</span>
+                    <span class="food-item">Fatty fish</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <h4><i class="fas fa-lightbulb"></i> Important Note</h4>
+            <p>This diet plan is specifically tailored for diabetes management. Portion control and regular meal timing are equally important as food selection. Always consult with your healthcare provider before making significant dietary changes.</p>
+        </div>
+
+        <section class="consultation-section">
+            <p>Would you like personalized guidance from our certified diabetes dietitian?</p>
+            <button class="btn" onclick="window.location.href='/appointment'">
+                <i class="fas fa-calendar-alt"></i> Book Online Consultation
+            </button>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate food items on hover
+            const foodItems = document.querySelectorAll('.food-item');
+            foodItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px)';
+                });
+                item.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Add animation delays to plan sections
+            const sections = document.querySelectorAll('.plan-section');
+            sections.forEach((section, index) => {
+                section.style.animationDelay = `${index * 0.2 + 0.2}s`;
+            });
+
+            // Pulse animation for consultation button
+            const consultationBtn = document.querySelector('.btn');
+            setInterval(() => {
+                consultationBtn.style.transform = 'translateY(-3px)';
+                setTimeout(() => {
+                    consultationBtn.style.transform = 'translateY(0)';
+                }, 300);
+            }, 2000);
+        });
+
+        // Print functionality
+        function printDietPlan() {
+            window.print();
+        }
+    </script>
+</body>
+</html>

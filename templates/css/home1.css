@@ -1,0 +1,270 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Quicksand", sans-serif;
+}
+
+body {
+    background-color: #f4f8fb;
+    color: #333;
+    line-height: 1.6;
+    padding-top: 80px;
+}
+
+/* Header */
+header {
+    background: #27AE60;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #27AE60; 
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    padding: 15px 20px;
+    
+}
+
+header h1 {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.header-right a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.header-right a:hover {
+    text-decoration: underline;
+}
+
+/* Hero Section */
+.landing {
+    text-align: center;
+    padding-bottom: 50px;
+    background: linear-gradient(to right, #27AE60, #219150);
+    color: white;
+}
+
+.landing h2 {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.landing p {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+/* Block Container (Full-Width Sections) */
+.block-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    padding: 50px 0;
+    width: 100%;
+}
+
+/* Full-Width Block */
+.block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 50px;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Text Section */
+.block .text {
+    flex: 1;
+    padding: 20px;
+    font-size: 18px;
+    max-width: 50%;
+}
+
+/* Image Styling */
+.block img {
+    width: 40%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+/* Alternate blocks: Even ones have image on left */
+.block:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+/* Button Styling */
+.btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 12px 24px;
+    background-color: #27AE60;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background-color: #219150;
+}
+
+/* About Us Section */
+.about-us {
+    display: flex;
+    align-items: center;
+    background-color: #e8f5e9;
+    padding: 50px;
+    width: 100%;
+    justify-content: space-between;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.about-us.active {
+    background-color: #c8e6c9; /* Lighter green when highlighted */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* About Text (Left Side) */
+.about-text {
+    flex: 1;
+    text-align: left; /* Align text to the left */
+    padding: 20px;
+}
+
+/* About Image (Right Side) */
+.about-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.about-image img {
+    width: 250px;
+    height: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .about-us {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .about-text {
+        text-align: center;
+    }
+
+    .about-image {
+        margin-top: 20px;
+    }
+}
+
+
+/* Footer */
+.footer {
+    background: #1b5e20;
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.footer .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-brand img {
+    width: 50px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 800px;
+    margin-top: 20px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.footer-section a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer-section a:hover {
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    margin-top: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .block {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px;
+    }
+
+    .block:nth-child(even) {
+        flex-direction: column;
+    }
+
+    .block img {
+        width: 80%;
+        max-width: 350px;
+        margin-top: 15px;
+    }
+
+    .block .text {
+        max-width: 100%;
+    }
+
+    .about-us {
+        flex-direction: column;
+        text-align: center;
+    }
+}

@@ -1,0 +1,21 @@
+*{
+    font-family: "Quicksand", sans-serif;
+    
+    color: rgb(9, 83, 72);
+    }
+body{
+    background-color: aliceblue;
+    position:relative;
+    
+    background-size: cover;
+    background-size: 100% 100%;
+}
+.text{
+    text-align: center;
+    font-size: large;
+}
+
+.consultation{ text-align: left; 
+    color:rgb(34, 31, 39);
+    font-weight: 800;
+}

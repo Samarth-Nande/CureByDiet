@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Center | CureByDiet</title>
+    <style>
+        :root {
+            --primary: #2c8a7d;
+            --primary-light: #e0f2f1;
+            --secondary: #e74c3c;
+            --accent: #f39c12;
+            --dark: #333;
+            --light: #f8f9fa;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+
+        /* Main Content */
+        .help-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .help-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .help-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .help-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+
+        .help-header p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Search Box */
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid #ddd;
+            border-radius: 50px;
+            font-size: 1rem;
+            transition: var(--transition);
+            padding-right: 50px;
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(44, 138, 125, 0.2);
+        }
+
+        .search-box button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .search-box button:hover {
+            background-color: #237a6d;
+            transform: scale(1.05);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            font-size: 1.5rem;
+        }
+
+        .faq-item {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--dark);
+            transition: var(--transition);
+        }
+
+        .faq-question:hover {
+            color: var(--primary);
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .faq-item.active .faq-question::after {
+            content: '-';
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            color: #555;
+            border-top: 1px solid transparent;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            max-height: 300px;
+            border-top: 1px solid #eee;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 2.5rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .contact-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-card {
+            background-color: var(--primary-light);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-card i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .contact-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card p {
+            color: #555;
+        }
+
+        .contact-card a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .contact-card a:hover {
+            color: #c0392b;
+        }
+
+        .btn {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 1.5rem;
+        }
+
+        .btn:hover {
+            background-color: #c0392b;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(231, 76, 60, 0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .help-container {
+                padding: 0 1rem;
+            }
+            
+            .help-header h1 {
+                font-size: 2rem;
+            }
+            
+            .contact-methods {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-heartbeat"></i>
+            CureByDiet
+        </div>
+    </header>
+
+    <main class="help-container">
+        <div class="help-header">
+            <h1>Help Center</h1>
+            <p>Find answers to common questions or contact our support team for personalized assistance.</p>
+        </div>
+
+        <div class="search-box">
+            <input type="text" placeholder="Search help articles...">
+            <button type="submit"><i class="fas fa-search"></i></button>
+        </div>
+
+        <div class="faq-section">
+            <h2 class="section-title"><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">How does CureByDiet work?</div>
+                <div class="faq-answer">
+                    <p>CureByDiet uses advanced symptom analysis to predict potential health conditions and provides personalized diet plans to support your recovery and overall wellbeing. Our system combines medical knowledge with nutritional science to offer comprehensive health solutions.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How accurate is the disease prediction?</div>
+                <div class="faq-answer">
+                    <p>While our symptom-to-disease mapping is based on reliable medical databases, it's important to note that this is a preliminary assessment. Our predictions have an accuracy rate of approximately 85% for common conditions, but we always recommend consulting with a healthcare professional for definitive diagnosis.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How can I contact a doctor through CureByDiet?</div>
+                <div class="faq-answer">
+                    <p>After receiving your health assessment, you'll have the option to book a consultation with one of our partner healthcare providers. We'll display available doctors specializing in your predicted condition along with their contact information and appointment scheduling options.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Are the diet plans personalized?</div>
+                <div class="faq-answer">
+                    <p>Yes! Our diet plans are tailored based on your predicted condition, symptoms, and basic health profile. We take into account common nutritional needs for specific health conditions while recommending foods that are generally well-tolerated.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Is my health data secure?</div>
+                <div class="faq-answer">
+                    <p>Absolutely. We prioritize your privacy and security. All health information is encrypted and stored securely. We never share your personal health data with third parties without your explicit consent.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-section">
+            <h2 class="section-title"><i class="fas fa-headset"></i> Contact Support</h2>
+            <p>Can't find what you're looking for? Our support team is ready to help you.</p>
+            
+            <div class="contact-methods">
+                <div class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email Us</h3>
+                    <p>For general inquiries and support</p>
+                    <a href="mailto:support@curebydiet.com">support@curebydiet.com</a>
+                </div>
+                
+                <div class="contact-card">
+                    <i class="fas fa-phone-alt"></i>
+                    <h3>Call Us</h3>
+                    <p>Available Monday-Friday, 9AM-5PM</p>
+                    <a href="tel:+1234567890">+123 456 7890</a>
+                </div>
+                
+                <div class="contact-card">
+                    <i class="fas fa-comment-dots"></i>
+                    <h3>Live Chat</h3>
+                    <p>Instant messaging with our team</p>
+                    <a href="#" onclick="alert('Live chat will be available soon!')">Start Chat</a>
+                </div>
+            </div>
+            
+            <button class="btn" onclick="window.location.href='mailto:support@curebydiet.com'">
+                <i class="fas fa-paper-plane"></i> Send Message
+            </button>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ toggle functionality
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    // Close all other items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current item
+                    item.classList.toggle('active');
+                });
+            });
+
+            // Search functionality
+            const searchInput = document.querySelector('.search-box input');
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                faqItems.forEach(item => {
+                    const question = item.querySelector('.faq-question').textContent.toLowerCase();
+                    const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+                    
+                    if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                        item.style.display = 'block';
+                        
+                        // Highlight matching text
+                        if (searchTerm.length > 2) {
+                            const regex = new RegExp(searchTerm, 'gi');
+                            const questionText = item.querySelector('.faq-question').textContent;
+                            const answerText = item.querySelector('.faq-answer').textContent;
+                            
+                            item.querySelector('.faq-question').innerHTML = questionText.replace(regex, 
+                                match => `<span style="background-color: #fff9c4">${match}</span>`);
+                            
+                            item.querySelector('.faq-answer').innerHTML = answerText.replace(regex, 
+                                match => `<span style="background-color: #fff9c4">${match}</span>`);
+                        }
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+
+            // Animation for contact cards
+            const contactCards = document.querySelectorAll('.contact-card');
+            contactCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.5s ease';
+                
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100 + 300);
+            });
+
+            // Button hover effect
+            const btn = document.querySelector('.btn');
+            btn.addEventListener('mouseenter', () => {
+                btn.style.transform = 'translateY(-3px)';
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>

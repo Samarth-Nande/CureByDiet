@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Registration Page</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="/css/registraion.css">
+</head>
+<body>
+	<form id="registration-form">
+		<h1>Registration </h1>
+		<label for="fullname">Full Name:</label><br>
+		<input class="ans" type="text" id="fullname" name="fullname" required onblur="validateFullname()" autofocus><br>
+		<span class="error" id="fullname-error"></span><br>
+
+		<label for="address">City:</label><br>
+		<input class="ans" type="text" id="city" name="city" required onblur="validateCity()"><br>
+		<span class="error" id="city-error"></span><br>
+
+		<label for="contactno">Contact No:</label><br>
+		<input class="ans" type="tel" id="contactno" name="contactno" required onblur="validateContactno()" pattern="[0-9]{10}"><br>
+		<span class="error" id="contactno-error"></span><br>
+	
+		<label for="age">Age:</label><br>
+		<input class="ans" type="number" id="age" name="age" required onblur="validateAge()"><br>
+		<span class="error" id="age-error"></span><br>
+
+		<label for="gender">Gender:</label><br>
+		<select class="ans" id="gender" name="gender" required onblur="validateGender()">
+			<option value="male">Male</option>
+			<option value="female">Female</option>
+		</select><br>
+		<span class="error" id="gender-error"></span><br>
+
+		<label for="email">Email:</label><br>
+		<input class="ans" type="email" id="email" name="email" required onblur="validateEmail()"><br>
+		<span class="error" id="email-error"></span><br>
+		<label for="password">Password:</label><br>
+		<input class="ans" type="password" id="password" name="password" required onblur="validatePassword()" pattern=".{8,}"><br>
+		<span class="error" id="password-error"></span><br>
+		<label for="repassword">Re-Enter Password:</label><br>
+		<input class="ans" type="password" id="repassword" name="repassword" required onblur="validateReEnterPassword()" pattern=".{8,}"><br>
+		<span class="error" id="repassword-error"></span><br>
+
+		<a onclick="login()" href="./login.html"><button>Submit</button></a>
+	</form>
+	<script src="/javascript/registration.js"></script>
+</body>
+</html>

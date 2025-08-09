@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symptom Checker | CureByDiet</title>
+    <style>
+        :root {
+            --primary-color: #2c8a7d;
+            --secondary-color: #e74c3c;
+            --light-color: #f5f5f5;
+            --dark-color: #333;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--dark-color);
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem 2rem;
+            box-shadow: var(--shadow);
+            position: relative;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+
+        /* Main Content */
+        main {
+            min-height: calc(100vh - 150px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 0;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 800px;
+            transition: var(--transition);
+            transform: translateY(0);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background-color: white;
+            cursor: pointer;
+        }
+
+        select:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(44, 138, 125, 0.2);
+        }
+
+        select[multiple] {
+            height: auto;
+            min-height: 150px;
+            padding: 10px;
+        }
+
+        select[multiple] option {
+            padding: 8px 10px;
+            margin: 2px 0;
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        select[multiple] option:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        select[multiple] option:checked {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #237a6d;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+        }
+
+        .btn i {
+            margin-right: 8px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: auto;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Loading spinner */
+        .spinner {
+            display: none;
+            width: 40px;
+            height: 40px;
+            margin: 0 auto;
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top: 4px solid var(--primary-color);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">❤️</span>
+                <span>CureByDiet</span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="card">
+                <h2>Health Symptom Checker</h2>
+                <p style="text-align: center; margin-bottom: 1.5rem; color: #666;">
+                    Select your symptoms from the list below to receive a personalized health analysis
+                </p>
+                
+                <form id="symptomForm">
+                    <div class="form-group">
+                        <label for="symptoms">Select your symptoms (Hold Ctrl/Cmd to select multiple):</label>
+                        <select id="symptoms" multiple>
+                            <option value="fatigue">Fatigue</option>
+                            <option value="unexplained weight loss">Unexplained Weight Loss</option>
+                            <option value="fever">Fever</option>
+                            <option value="night sweats">Night Sweats</option>
+                            <option value="loss of appetite">Loss of Appetite</option>
+                            <option value="chest pain">Chest Pain</option>
+                            <option value="shortness of breath">Shortness of Breath</option>
+                            <option value="irregular heartbeat">Irregular Heartbeat</option>
+                            <option value="swelling in ankles or legs">Swelling in Ankles or Legs</option>
+                            <option value="persistent cough">Persistent Cough</option>
+                            <option value="wheezing">Wheezing</option>
+                            <option value="difficulty breathing">Difficulty Breathing</option>
+                            <option value="productive cough">Productive Cough</option>
+                            <option value="dry cough">Dry Cough</option>
+                            <option value="nausea">Nausea</option>
+                            <option value="diarrhea">Diarrhea</option>
+                            <option value="constipation">Constipation</option>
+                            <option value="abdominal pain">Abdominal Pain</option>
+                            <option value="frequent urination">Frequent Urination</option>
+                            <option value="painful urination">Painful Urination</option>
+                            <option value="blood in urine">Blood in Urine</option>
+                            <option value="tobacco use">Tobacco Use</option>
+                            <option value="alcohol consumption">Alcohol Consumption</option>
+                            <option value="anxiety">Anxiety</option>
+                            <option value="depression">Depression</option>
+                            <option value="mood swings">Mood Swings</option>
+                        </select>
+                    </div>
+
+                    <div id="selectedSymptoms" style="margin-bottom: 1.5rem;"></div>
+
+                    <div class="button-group">
+                        <button type="button" class="btn btn-primary" onclick="submitSymptoms()">
+                            <i>🔍</i> Analyze Symptoms
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="clearSelection()">
+                            <i>🗑️</i> Clear
+                        </button>
+                    </div>
+
+                    <div id="loadingSpinner" class="spinner"></div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 CureByDiet. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Display selected symptoms
+        document.getElementById('symptoms').addEventListener('change', function() {
+            const selectedOptions = Array.from(this.selectedOptions).map(option => option.text);
+            const selectedContainer = document.getElementById('selectedSymptoms');
+            
+            if (selectedOptions.length > 0) {
+                selectedContainer.innerHTML = `
+                    <strong>Selected Symptoms:</strong> 
+                    <span style="color: #2c8a7d;">${selectedOptions.join(', ')}</span>
+                `;
+            } else {
+                selectedContainer.innerHTML = '';
+            }
+        });
+
+        // Clear selection
+        function clearSelection() {
+            const select = document.getElementById('symptoms');
+            Array.from(select.options).forEach(option => option.selected = false);
+            document.getElementById('selectedSymptoms').innerHTML = '';
+            
+            // Add visual feedback
+            const card = document.querySelector('.card');
+            card.style.animation = 'none';
+            void card.offsetWidth; // Trigger reflow
+            card.style.animation = 'fadeIn 0.5s ease';
+        }
+
+        // Submit symptoms with enhanced UI feedback
+        function submitSymptoms() {
+            const selectedOptions = document.getElementById("symptoms").selectedOptions;
+            const symptoms = Array.from(selectedOptions).map(option => option.value);
+            
+            if (symptoms.length === 0) {
+                alert("Please select at least one symptom to continue.");
+                return;
+            }
+
+            // Show loading spinner
+            const spinner = document.getElementById('loadingSpinner');
+            const submitBtn = document.querySelector('.btn-primary');
+            spinner.style.display = 'block';
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i>⏳</i> Analyzing...';
+
+            // Add pulse animation to card
+            document.querySelector('.card').classList.add('pulse');
+
+            // Original fetch call (unchanged backend functionality)
+            fetch("/predict", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ symptoms: symptoms.join(", ") })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Server returned an error");
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("Prediction Response:", data);
+                localStorage.setItem("prediction", JSON.stringify(data));
+                
+                // Add success animation before redirect
+                document.querySelector('.card').classList.remove('pulse');
+                document.querySelector('.card').style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    window.location.href = "/result";
+                }, 300);
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                
+                // Show error feedback
+                const card = document.querySelector('.card');
+                card.style.animation = 'none';
+                void card.offsetWidth; // Trigger reflow
+                card.style.animation = 'shake 0.5s ease';
+                
+                // Reset UI
+                spinner.style.display = 'none';
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i>🔍</i> Analyze Symptoms';
+                card.classList.remove('pulse');
+                
+                alert("Failed to submit symptoms. Please try again later.");
+            });
+
+            // Add shake animation for errors
+            const style = document.createElement('style');
+            style.innerHTML = `
+                @keyframes shake {
+                    0%, 100% { transform: translateX(0); }
+                    20%, 60% { transform: translateX(-5px); }
+                    40%, 80% { transform: translateX(5px); }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // Initialize with fade-in animation
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('.card').style.opacity = '0';
+            setTimeout(() => {
+                document.querySelector('.card').style.transition = 'opacity 0.5s ease';
+                document.querySelector('.card').style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>

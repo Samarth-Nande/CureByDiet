@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Health Report | CureByDiet</title>
+    <style>
+        :root {
+            --medical-teal: #008080;
+            --alert-red: #ff6b6b;
+            --soft-blue: #e3f2fd;
+            --dark-slate: #2f4f4f;
+            --light-gray: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            min-height: 100vh;
+            color: var(--dark-slate);
+        }
+        
+        .report-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .report-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: slideDown 0.8s ease;
+        }
+        
+        @keyframes slideDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .logo-badge {
+            background-color: var(--medical-teal);
+            color: white;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 128, 128, 0.3);
+        }
+        
+        .report-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .report-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--medical-teal), #00b4d8);
+        }
+        
+        .diagnosis-banner {
+            background-color: rgba(255, 107, 107, 0.1);
+            border-left: 4px solid var(--alert-red);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            animation: pulseGlow 2s infinite alternate;
+        }
+        
+        @keyframes pulseGlow {
+            from { box-shadow: 0 0 0 rgba(255, 107, 107, 0); }
+            to { box-shadow: 0 0 15px rgba(255, 107, 107, 0.2); }
+        }
+        
+        .banner-icon {
+            font-size: 2.5rem;
+            margin-right: 1.5rem;
+            color: var(--alert-red);
+        }
+        
+        .section-title {
+            color: var(--medical-teal);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+        }
+        
+        .section-title i {
+            margin-right: 12px;
+            font-size: 1.5rem;
+        }
+        
+        .recommendation-card {
+            background: var(--light-gray);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--medical-teal);
+            transition: all 0.3s ease;
+        }
+        
+        .recommendation-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .recommendation-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px dashed #ddd;
+            animation: fadeIn 0.5s ease forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        
+        .item-bullet {
+            background-color: var(--medical-teal);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+            font-size: 0.8rem;
+        }
+        
+        .action-panel {
+            display: flex;
+            gap: 1rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .action-btn {
+            padding: 0.8rem 1.8rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .primary-btn {
+            background: linear-gradient(to right, var(--medical-teal), #00b4d8);
+            color: white;
+        }
+        
+        .secondary-btn {
+            background: white;
+            color: var(--medical-teal);
+            border: 2px solid var(--medical-teal);
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .action-btn i {
+            margin-right: 8px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .report-card {
+                padding: 1.5rem;
+            }
+            
+            .diagnosis-banner {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .banner-icon {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+            
+            .action-panel {
+                flex-direction: column;
+            }
+            
+            .action-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="report-container">
+        <header class="report-header">
+            <div class="logo-badge">
+                <i class="fas fa-heartbeat"></i>
+            </div>
+            <h1>Your Personalized Health Report</h1>
+            <p>Generated on <span id="report-date"></span></p>
+        </header>
+        
+        <main>
+            <div class="report-card">
+                <div class="diagnosis-banner">
+                    <div class="banner-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div>
+                        <h3>Primary Diagnosis</h3>
+                        <p id="disease" class="diagnosis-result"></p>
+                        <p id="condition-description" class="diagnosis-description"></p>
+                    </div>
+                </div>
+                
+                <div class="nutrition-section">
+                    <h3 class="section-title"><i class="fas fa-utensils"></i> Recommended Nutrition Plan</h3>
+                    <div class="recommendation-card">
+                        <ul id="diet"></ul>
+                    </div>
+                </div>
+                
+                <div class="lifestyle-section">
+                    <h3 class="section-title"><i class="fas fa-running"></i> Lifestyle Recommendations</h3>
+                    <div class="recommendation-card">
+                        <ul id="lifestyle"></ul>
+                    </div>
+                </div>
+                
+                <div class="action-panel">
+                    <button class="action-btn primary-btn" onclick="window.location.href='/appointment'">
+                        <i class="fas fa-calendar-check"></i> Book Doctor Visit
+                    </button>
+                    <button class="action-btn secondary-btn" onclick="window.print()">
+                        <i class="fas fa-print"></i> Print Full Report
+                    </button>
+                    <button class="action-btn secondary-btn" onclick="window.location.href='/question'">
+                        <i class="fas fa-redo"></i> New Symptom Check
+                    </button>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>This report is generated by CureByDiet's AI analysis system</p>
+            <p>&copy; 2024 CureByDiet. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Set current date
+            const now = new Date();
+            document.getElementById('report-date').textContent = now.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            
+            // Get prediction data (original backend functionality unchanged)
+            let data = JSON.parse(localStorage.getItem("prediction"));
+            
+            if (data) {
+                // Display diagnosis
+                const diseaseElement = document.getElementById('disease');
+                diseaseElement.textContent = data.predictedDisease;
+                
+                // Add description
+                const descriptionElement = document.getElementById('condition-description');
+                descriptionElement.textContent = getDiseaseDescription(data.predictedDisease);
+                
+                // Animate diet recommendations
+                const dietList = document.getElementById('diet');
+                data.dietPlan.forEach((item, index) => {
+                    setTimeout(() => {
+                        const li = createRecommendationItem(item, index + 1);
+                        dietList.appendChild(li);
+                    }, index * 150);
+                });
+                
+                // Animate lifestyle recommendations
+                const lifestyleList = document.getElementById('lifestyle');
+                data.lifestyleChanges.forEach((item, index) => {
+                    setTimeout(() => {
+                        const li = createRecommendationItem(item, index + 1);
+                        lifestyleList.appendChild(li);
+                    }, (data.dietPlan.length + index) * 150);
+                });
+            } else {
+                // No data found - redirect after delay
+                setTimeout(() => {
+                    window.location.href = '/question';
+                }, 3000);
+            }
+        });
+        
+        function createRecommendationItem(text, number) {
+            const item = document.createElement('li');
+            item.className = 'recommendation-item';
+            item.style.animationDelay = `${number * 0.1}s`;
+            
+            item.innerHTML = `
+                <div class="item-bullet">${number}</div>
+                <div class="item-text">${text}</div>
+            `;
+            
+            return item;
+        }
+        
+        function getDiseaseDescription(disease) {
+            const descriptions = {
+                "Diabetes": "This condition affects your body's ability to process sugar. The recommendations are designed to help regulate blood sugar levels.",
+                "Hypertension": "High blood pressure requires careful management through diet and lifestyle. These recommendations aim to support cardiovascular health.",
+                "Anemia": "Iron deficiency can cause fatigue and weakness. The suggested plan focuses on nutrient-rich foods to support red blood cell production.",
+                "Default": "Based on your reported symptoms, these recommendations are tailored to support your overall health and wellbeing."
+            };
+            
+            return descriptions[disease] || descriptions["Default"];
+        }
+    </script>
+</body>
+</html>
